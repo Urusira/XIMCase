@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640838132697",
+    "project_id": "chemcase-de615",
+    "storage_bucket": "chemcase-de615.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640838132697:android:cc2aebe8d7ce9cdad8efc8",
+        "android_client_info": {
+          "package_name": "com.chemdot.ChemCase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsVKCPwRjKrl_OPf7qD0Nb9hIjONaz_-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
