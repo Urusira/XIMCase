@@ -6,10 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".GameCycle">
 
-    <View
-        android:id="@+id/view"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/questionsCard"
         android:layout_width="0dp"
-        android:layout_height="590dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="70dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +24,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/questionsCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -57,4 +63,5 @@
             app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
