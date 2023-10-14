@@ -55,6 +55,5 @@ class CardSchematic : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-        хз что это такое
     }
 }
