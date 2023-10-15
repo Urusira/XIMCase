@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Пожалуйства, введите имя пользователя"
+                android:text="Пожалуйста, войдите в свою учётную запись"
                 android:textColor="#666666"
                 android:textSize="16sp"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -56,24 +56,53 @@
                 android:layout_marginTop="20dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/loginUName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Имя"
                     android:textColor="#333333"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/loginPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Пароль"
+                    android:textColor="#333333"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/btn_singIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="#7600d9"
-                android:text="Начать"
+                android:text="Войти"
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textColor="@color/white">
-
             </Button>
+
+            <TextView
+                android:id="@+id/link_signUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Регистрация"
+                android:gravity="center"
+                android:linksClickable="true"
+                android:textColor="#444444"/>
+            <TextView
+                android:id="@+id/link_forgot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Я забыл имя логин/пароль"
+                android:gravity="center"
+                android:linksClickable="true"
+                android:textColor="#444444"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
