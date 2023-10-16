@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- линейный лэйаут, позволяет последовательно выводить элементы -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +9,12 @@
     android:background="@drawable/ic_background_welcome"
     android:orientation="vertical"
     tools:context=".WelcomePage">
+    <!-- В нём обязательно надо указать ориентейшен - как будут выводиться
+     объекты, их порядок. Вертикал - столбец, хоризонтал - по горизонтали -->
+    <!-- Гравити позволяет задать точку притяжения объекта. Представь, что это
+     точка с силой притяжения, туда стремится объект.
+     Если таких объектов несколько, то они как бы облепливают эту точку
+     со всех сторон-->
 
     <TextView
         android:id="@+id/tv_app_name"
@@ -20,6 +27,16 @@
         android:textColor="@android:color/white"
         android:gravity="center"
         />
+    <!-- Текст вью понятно, тупо текст.
+    лейаут видтх и лейаут хейгхт позволяет задать размеры объекта.
+    Так же там можно вписать матч парент и врап контент.
+    По порядку.
+    Матч парент задаёт объекту максимальный внутри родительского размер. То есть
+    текстовое поле у меня находится внутри коробки и я задаю ему ширину
+    соответствующую этой коробке, объект растягивается от одной стенки коробки
+    до другой.
+    Врап контент задаёт размер согласно ДОЧЕРНИМ элементам этого объекта.
+    Объект тогда как бы "оборачивает" всё, что находится внутри него.-->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -30,6 +47,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
         >
+        <!-- Кардвью позволяет формировать объекты внутри в виде боксов,
+         контейнеров в виде карточек, которые размещаются по сетке
+         относительно друг друга-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,12 +75,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <!-- Вот это уже сложно, это из гугловской библиотеки "материал",
+                 это текстовое поле для ввода. Оно удобно для работы с ним
+                 в коде.-->
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/loginUName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Имя"
                     android:textColor="#333333"/>
+                <!-- Внутренний элемент, отвечает за текст внутри этого
+                 поля. Можно задать хинт - шаблонный фоновый текст, пример для ввода
+                 для тупого пользователя.
+                 Имеет атрибут text, который позволяет выцепить то, что ввёл пользователь
+                 внутри кода и уже работать с введённой строкой как нам заблагорассудится-->
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -84,6 +112,7 @@
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textColor="@color/white">
+                <!-- Ну тут понятно, тупо кнопка -->
             </Button>
 
             <TextView

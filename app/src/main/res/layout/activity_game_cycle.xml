@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- См активити пейдж, большую часть элементов разобрал там -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,12 +33,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp">
+                <!-- Это объект, группирующий в себе радио-кнопки. Это чекбоксы
+                 с единичным выбором. Нельзя выбрать несколько, только 1 внутри
+                 группы.-->
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
                     android:textColor="#333333"
                     android:textSize="21sp"/>
+                <!-- Радиокнопка, просто влажок. В атрибуте "текст" прописывается
+                 текст, который будет выводиться справа от флажка.-->
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
