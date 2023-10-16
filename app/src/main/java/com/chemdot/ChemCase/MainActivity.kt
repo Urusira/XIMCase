@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Всё, что тут есть уже описано в activity_welcome_page.xml
         val newGame = findViewById<Button>(R.id.newGame)
         val exit = findViewById<Button>(R.id.exit)
 
