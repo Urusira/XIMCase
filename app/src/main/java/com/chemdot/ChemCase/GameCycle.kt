@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.chemdot.ChemCase.databinding.ActivityGameCycleBinding
@@ -24,34 +24,33 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameCycleBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_game_cycle)
+        setContentView(binding.root)
 
         QuestionsList = Constants.getQuestions()
 
 
         setQuestions()
-        Log.i("ёпты бля`", "${QuestionsList!!}")
 
-        val optionOne = findViewById<TextView>(R.id.optionOne)   //  В переменную логин помещаем объект "кнопка" с заданным айдишником
-        val optionTwo = findViewById<TextView>(R.id.optionTwo)   //  В переменную логин помещаем объект "кнопка" с заданным айдишником
-        val optionThree = findViewById<TextView>(R.id.optionThree)   //  В переменную логин помещаем объект "кнопка" с заданным айдишником
-        val optionFour = findViewById<TextView>(R.id.optionFour)   //  В переменную логин помещаем объект "кнопка" с заданным айдишником
-
-        optionOne.setOnClickListener(this)
-        optionTwo.setOnClickListener(this)
-        optionThree.setOnClickListener(this)
-        optionFour.setOnClickListener(this)
+        binding.optionOne.setOnClickListener(this)
+        binding.optionTwo.setOnClickListener(this)
+        binding.optionThree.setOnClickListener(this)
+        binding.optionFour.setOnClickListener(this)
+        binding.nextQuestion.setOnClickListener(this)
 
         // Уже описал функцию в велком пейдж
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
 
     private fun setQuestions(){
-        Log.i("ёпты бля`", "ДА СУКА ХВАТИТ СЕТАТЬ ВОПРОСЫ БЛЯДОТА ЁПТ")
-        CurrentPosition = 1 //  Инициируем переменную "текущая позиция"
         val qquestion = QuestionsList!![CurrentPosition-1]  //  в переменную квесчен помещаем текуший вопрос из списка вопросов
 
         defaultOptionsView()        //  Вызываем метод перекраса кнопок в стандартный цвет
+
+        if(CurrentPosition == QuestionsList!!.size) {
+            binding.nextQuestion.text = "Завершить"
+        } else {
+            binding.nextQuestion.text = "Подтвердить"
+        }
 
         //  Получаем текущий прогресс из полоски прогресса
         binding.progressBar.progress = CurrentPosition
@@ -69,17 +68,14 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
     //  Функция для сброса оформления кнопок. Присваивает им первоначальный внешний вид.
     private fun defaultOptionsView(){
-        Log.i("ёпты бля`", "ХЕНДЕХОХ ЁПТЫ БЛЯ")
         val options = ArrayList<TextView>() //  Получаем список кнопок
         options.add(0, binding.optionOne)
         options.add(1, binding.optionTwo)
         options.add(2, binding.optionThree)
         options.add(3, binding.optionFour)
-        Log.i("ёпты бля`", "${options.size}")
 
         // В цикле проходимся по этим кнопкам
         for (option in options) {
-            Log.i("ёпты бля`", "ААААА ПЕРЕКРАААС В СТАНДААРТ ААА")
             option.setTextColor(Color.parseColor("#444444"))    //  Задаём цвет шрифта
             option.typeface = Typeface.DEFAULT                  // Задаём стандартный шрифт
             option.background = ContextCompat.getDrawable(      //  Присваиваем им оформление option_bg
@@ -91,7 +87,6 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
     // Эта функция позволяет фиксировать те моменты, когда мы нажимаем на кнопку возврата на самой мобиле
     override fun onBackPressed() {
-        Log.i("ёпты бля`", "Так блэт. Ты куда собрался? У нас криминал, ты когда по коням дашь?")
 
         // Используем билдер алертов
         AlertDialog.Builder(this).apply {
@@ -114,27 +109,81 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.optionOne ->{
-                Log.i("ёпты бля`", "ПЕРВАЯ КНОПКА НАЖАТА")
                 selectedOptionView(binding.optionOne, 1)    //  Считай тот же свич-кейс. Если нажали на первую кнопку, отправляем её в функцию ниже и говорим, что это первая кнопка
             }
             R.id.optionTwo ->{
-                Log.i("ёпты бля`", "ВТОРАЯ КНОПКА ПОШЛА")
                 selectedOptionView(binding.optionTwo, 2)    //  Дальше по аналогии
             }
             R.id.optionThree ->{
-                Log.i("ёпты бля`", "ВНИМАНИЕ ВСЕМ ПОСТАМ НАЖАТА ТРЕТЬЯ КНОПКА")
                 selectedOptionView(binding.optionThree, 3)
             }
             R.id.optionFour ->{
-                Log.i("ёпты бля`", "ААААААААААААААААААА")
                 selectedOptionView(binding.optionFour, 4)
+            }
+            R.id.nextQuestion ->{                           // Здесь алгоритм кнопки "далее"
+                if(SelectedOptionPosition == 0) {
+                    CurrentPosition++
+                    binding.explane.text = ""
+
+                    when{
+                        CurrentPosition <= QuestionsList!!.size -> {// Если текущая позиция меньше суммарного количества вопросов
+                            setQuestions()//Выводим вопросы дальше
+                        } else ->{//В противном случае выводим сообщение-тост с надписью "ты прошёл тест"
+                        val intent = Intent(this, DialogendActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        }
+                    }
+                } else {
+                    val question = QuestionsList?.get(CurrentPosition - 1)
+                    if (question!!.correctAnswer != SelectedOptionPosition) {
+                        answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
+                    }
+                    answerView(question.correctAnswer, R.drawable.correct_option_bg)
+
+                    if(CurrentPosition == QuestionsList!!.size) {
+                        binding.nextQuestion.text = "Завершить"
+                    } else {
+                        binding.nextQuestion.text = "Далее"
+                    }
+                    binding.explane.text = question.explanation
+                    SelectedOptionPosition = 0
+                }
+            }
+        }
+    }
+
+    private fun answerView(answer: Int, drawableView: Int) {
+        when(answer){
+            1 ->{
+                binding.optionOne.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            2 ->{
+                binding.optionTwo.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            3 ->{
+                binding.optionThree.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            4 ->{
+                binding.optionFour.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
             }
         }
     }
 
     //  Функция для обработки нажатия на кнопку
     private fun selectedOptionView(tv: TextView, selectedOptionNumber: Int) {
-        Log.i("ёпты бля`", "АААААААА ПЕЕРЕКРАААААААААААС СУУУКА ДАЖЕ НЕ В ДЕФОЛТ ДА БЛЯЯЯ")
         defaultOptionsView()    //  Сначала сбрасываем к чертям оформление кнопок
         SelectedOptionPosition = selectedOptionNumber  //  Запоминаем, какую кнопку нажали
 
@@ -144,6 +193,5 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
             this,
             R.drawable.sel_option_bg
         )
-        Log.i("ёпты бля`", "Сука, опять перекрас...")
     }
 }
