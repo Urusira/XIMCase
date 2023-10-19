@@ -105,15 +105,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:backgroundTint="#DEBEEB"
+                android:backgroundTint="#DEDEEE"
                 android:gravity="center"
                 android:padding="15dp"
                 android:textSize="21sp"
-                android:text="Далее"
+                android:text="Подтвердить"
                 android:textColor="#444444"
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 />
+            <TextView
+                android:id="@+id/explane"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:text=""
+                android:textSize="21sp"
+                android:textColor="#444444"/>
 
         </LinearLayout>
 
