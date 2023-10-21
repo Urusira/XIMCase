@@ -2,6 +2,7 @@ package com.chemdot.ChemCase
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 class DialogendActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9,8 +10,9 @@ class DialogendActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dialogend)
 
         val gameexit = findViewById<Button>(R.id.exitTOquestions)
-                gameexit.setOnClickListener{
-                    finish()
-                }
+
+        gameexit.setOnClickListener{
+            finish()
+        }
     }
 }

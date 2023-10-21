@@ -12,13 +12,18 @@
         android:layout_height="wrap_content"
         android:text="Вернуться к тестам"
         tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="458dp" />
+        tools:layout_editor_absoluteY="458dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Поздравляем! Вы действительно фанат сей чудного напитка!"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="269dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="269dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

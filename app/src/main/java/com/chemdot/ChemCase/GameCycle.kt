@@ -1,5 +1,6 @@
 package com.chemdot.ChemCase
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -128,10 +129,10 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
                     when{
                         CurrentPosition <= QuestionsList!!.size -> {// Если текущая позиция меньше суммарного количества вопросов
                             setQuestions()//Выводим вопросы дальше
-                        } else ->{//В противном случае выводим сообщение-тост с надписью "ты прошёл тест"
-                        val intent = Intent(this, DialogendActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        } else ->{  //В противном случае выводим сообщение-тост с надписью "ты прошёл тест"
+                            val intent = Intent(this, DialogendActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 } else {
