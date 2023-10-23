@@ -19,6 +19,7 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
     private var CurrentPosition:Int = 1
     private var QuestionsList: ArrayList<Question>? = null
     private var SelectedOptionPosition : Int = 0
+    private var blocker = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +31,13 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
         setQuestions()
 
-        binding.optionOne.setOnClickListener(this)
-        binding.optionTwo.setOnClickListener(this)
-        binding.optionThree.setOnClickListener(this)
-        binding.optionFour.setOnClickListener(this)
-        binding.nextQuestion.setOnClickListener(this)
+        if(blocker == false){
+            binding.optionOne.setOnClickListener(this)
+            binding.optionTwo.setOnClickListener(this)
+            binding.optionThree.setOnClickListener(this)
+            binding.optionFour.setOnClickListener(this)
+            binding.nextQuestion.setOnClickListener(this)
+        }
 
         // Уже описал функцию в велком пейдж
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -42,19 +45,19 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestions(){
         val qquestion = QuestionsList!![CurrentPosition-1]  //  в переменную квесчен помещаем текуший вопрос из списка вопросов
-
+        blocker = false
         defaultOptionsView()        //  Вызываем метод перекраса кнопок в стандартный цвет
 
         if(CurrentPosition == QuestionsList!!.size) {
             binding.nextQuestion.text = "Завершить"
         } else {
-            binding.nextQuestion.text = "Подтвердить"
+            binding.nextQuestion.text = "Далее"
         }
 
         //  Получаем текущий прогресс из полоски прогресса
         binding.progressBar.progress = CurrentPosition
         //  В качестве текста правее полоски пишем текущую позицию из максимально возможной, для этой полоски
-        binding.progress.text = "$CurrentPosition" + "/" + binding.progressBar.max
+        binding.progress.text = "$CurrentPosition" + "/" + QuestionsList!!.size
 
         binding.questionText.text = qquestion.question //  Помещаем в поле с вопросом сам вопрос, который вычленяли из списка вопросов в самом начале
 
@@ -105,52 +108,107 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
     //  Оверрайд - перезапись, позволяет перезаписать уже существующую в программе функцию, например тут
     //  мы дополняем функцию ОнКликЛистенер, она не позволяет первоначально отслеживать нажатия на текст
     //  И не знает, что с этим делать. Тут мы говорим программе, как работать с этими объектами
-    override fun onClick(v: View?) {
-        when(v?.id) {
-            R.id.optionOne ->{
-                selectedOptionView(binding.optionOne, 1)    //  Считай тот же свич-кейс. Если нажали на первую кнопку, отправляем её в функцию ниже и говорим, что это первая кнопка
-            }
-            R.id.optionTwo ->{
-                selectedOptionView(binding.optionTwo, 2)    //  Дальше по аналогии
-            }
-            R.id.optionThree ->{
-                selectedOptionView(binding.optionThree, 3)
-            }
-            R.id.optionFour ->{
-                selectedOptionView(binding.optionFour, 4)
-            }
-            R.id.nextQuestion ->{                           // Здесь алгоритм кнопки "далее"
-                if(SelectedOptionPosition == 0) {
-                    CurrentPosition++
-                    binding.explane.text = ""
+        override fun onClick(v: View?) {
+            if(blocker == false){
+                when (v?.id) {
+                    R.id.optionOne -> {
+                        selectedOptionView(
+                            binding.optionOne,
+                            1
+                        )    //  Считай тот же свич-кейс. Если нажали на первую кнопку, отправляем её в функцию ниже и говорим, что это первая кнопка
+                        binding.nextQuestion.text = "Подтвердить"
+                    }
 
-                    when{
-                        CurrentPosition <= QuestionsList!!.size -> {// Если текущая позиция меньше суммарного количества вопросов
-                            setQuestions()//Выводим вопросы дальше
-                        } else ->{  //В противном случае выводим сообщение-тост с надписью "ты прошёл тест"
-                            val intent = Intent(this, DialogendActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                    R.id.optionTwo -> {
+                        selectedOptionView(binding.optionTwo, 2)    //  Дальше по аналогии
+                        binding.nextQuestion.text = "Подтвердить"
+                    }
+
+                    R.id.optionThree -> {
+                        selectedOptionView(binding.optionThree, 3)
+                        binding.nextQuestion.text = "Подтвердить"
+                    }
+
+                    R.id.optionFour -> {
+                        selectedOptionView(binding.optionFour, 4)
+                        binding.nextQuestion.text = "Подтвердить"
+                    }
+
+                    R.id.nextQuestion -> {                           // Здесь алгоритм кнопки "далее"
+                        blocker = true
+                        if (SelectedOptionPosition == 0) {
+                            CurrentPosition++
+                            binding.explane.text = ""
+
+                            when {
+                                CurrentPosition <= QuestionsList!!.size -> {// Если текущая позиция меньше суммарного количества вопросов
+                                    setQuestions()//Выводим вопросы дальше
+                                }
+
+                                else -> {  //В противном случае вызываем экран, где сообщаем пользователю, что он прошёл тест
+                                    val intent = Intent(this, DialogendActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                        } else {
+                            val question = QuestionsList?.get(CurrentPosition - 1)
+                            if (question!!.correctAnswer != SelectedOptionPosition) {
+                                answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
+                            }
+                            answerView(question.correctAnswer, R.drawable.correct_option_bg)
+
+                            if (CurrentPosition == QuestionsList!!.size) {
+                                binding.nextQuestion.text = "Завершить"
+                            } else {
+                                binding.nextQuestion.text = "Далее"
+                            }
+                            binding.explane.text = question.explanation
+                            blocker = true
+                            SelectedOptionPosition = 0
                         }
                     }
-                } else {
-                    val question = QuestionsList?.get(CurrentPosition - 1)
-                    if (question!!.correctAnswer != SelectedOptionPosition) {
-                        answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
-                    }
-                    answerView(question.correctAnswer, R.drawable.correct_option_bg)
+                }
+            }
+            else {
+                when (v?.id) {
+                    R.id.nextQuestion -> {                           // Здесь алгоритм кнопки "далее"
+                        blocker = true
+                        if (SelectedOptionPosition == 0) {
+                            CurrentPosition++
+                            binding.explane.text = ""
 
-                    if(CurrentPosition == QuestionsList!!.size) {
-                        binding.nextQuestion.text = "Завершить"
-                    } else {
-                        binding.nextQuestion.text = "Далее"
+                            when {
+                                CurrentPosition <= QuestionsList!!.size -> {// Если текущая позиция меньше суммарного количества вопросов
+                                    setQuestions()//Выводим вопросы дальше
+                                }
+
+                                else -> {  //В противном случае вызываем экран, где сообщаем пользователю, что он прошёл тест
+                                    val intent = Intent(this, DialogendActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                        } else {
+                            val question = QuestionsList?.get(CurrentPosition - 1)
+                            if (question!!.correctAnswer != SelectedOptionPosition) {
+                                answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
+                            }
+                            answerView(question.correctAnswer, R.drawable.correct_option_bg)
+
+                            if (CurrentPosition == QuestionsList!!.size) {
+                                binding.nextQuestion.text = "Завершить"
+                            } else {
+                                binding.nextQuestion.text = "Далее"
+                            }
+                            binding.explane.text = question.explanation
+                            blocker = true
+                            SelectedOptionPosition = 0
+                        }
                     }
-                    binding.explane.text = question.explanation
-                    SelectedOptionPosition = 0
                 }
             }
         }
-    }
 
     private fun answerView(answer: Int, drawableView: Int) {
         when(answer){
