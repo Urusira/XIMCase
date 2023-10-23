@@ -13,6 +13,7 @@ object Constants {
         filteredQuests.forEach{
             questionsList.add(it)
         }
+        shuffle(questionsList)
         return questionsList
     }
     fun getQuests(): ArrayList<Question>{
