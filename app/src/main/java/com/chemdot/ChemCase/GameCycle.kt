@@ -31,13 +31,11 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
         setQuestions()
 
-        if(blocker == false){
-            binding.optionOne.setOnClickListener(this)
-            binding.optionTwo.setOnClickListener(this)
-            binding.optionThree.setOnClickListener(this)
-            binding.optionFour.setOnClickListener(this)
-            binding.nextQuestion.setOnClickListener(this)
-        }
+        binding.optionOne.setOnClickListener(this)
+        binding.optionTwo.setOnClickListener(this)
+        binding.optionThree.setOnClickListener(this)
+        binding.optionFour.setOnClickListener(this)
+        binding.nextQuestion.setOnClickListener(this)
 
         // Уже описал функцию в велком пейдж
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
