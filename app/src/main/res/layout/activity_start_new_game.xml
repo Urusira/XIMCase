@@ -39,13 +39,14 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/newNonOrgGame"
+                android:id="@+id/typeMet"
+                android:tag="metal"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="5dp"
                 android:backgroundTint="#d73283"
                 android:gravity="center"
-                android:text="Не орг. химия"
+                android:text="Металл Ы"
                 android:textSize="12sp" />
 
             <ImageView
@@ -60,6 +61,19 @@
              прописывается их название, а не адрес.
              Чтобы картинка плотно прилегала к кнопке, я обрезал её и задал
              отрицательный отступ сверху, чтобы сдвинуть её вверх-->
+            <Button
+                android:id="@+id/typeNonMet"
+                android:tag="non_metal"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="5dp"
+                android:backgroundTint="#d73283"
+                android:gravity="center"
+                android:text="Не металл Ы"
+                android:textSize="12sp"
+                android:layout_marginTop="-108dp"
+                android:layout_marginEnd="-65dp"
+                tools:ignore="DuplicateIds" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

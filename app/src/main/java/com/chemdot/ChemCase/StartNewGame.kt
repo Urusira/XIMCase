@@ -5,17 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
 
 class StartNewGame : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_new_game)
 
-        val newNonOrgGame = findViewById<Button>(R.id.newNonOrgGame)
-
-        newNonOrgGame.setOnClickListener{
+        val newGameMet = findViewById<Button>(R.id.typeMet)
+        val newGameNonMet = findViewById<Button>(R.id.typeNonMet)
+        newGameMet.setOnClickListener{
             val intent = Intent(this, GameCycle::class.java)
+            intent.putExtra("category","${newGameMet.tag}")
+            startActivity(intent)
+            finish()
+        }
+        newGameNonMet.setOnClickListener{
+            val intent = Intent(this, GameCycle::class.java)
+            intent.putExtra("category","${newGameNonMet.tag}")
             startActivity(intent)
             finish()
         }

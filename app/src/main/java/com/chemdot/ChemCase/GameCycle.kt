@@ -5,10 +5,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.chemdot.ChemCase.databinding.ActivityGameCycleBinding
@@ -26,9 +24,9 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityGameCycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val cat = intent.getStringExtra("category")
 
-        QuestionsList = Constants.getQuestions()
-
+        QuestionsList = Constants.getQuestions("$cat")
 
         setQuestions()
 
