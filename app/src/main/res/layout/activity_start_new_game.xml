@@ -37,43 +37,58 @@
                 android:textColor="@color/white"
                 android:textSize="36sp"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/typeMet"
-                android:tag="metal"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:backgroundTint="#d73283"
-                android:gravity="center"
-                android:text="МеталлЫ"
-                android:textSize="12sp" />
-
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="-4dp"
-                android:background="@drawable/molecula" />
-            <!-- Аймедж вью. Я не использовал его в активити велком, только тут.
-             Позволяет выводить изображение. У меня изображение забито в
-             папке дровабля, поэтому я не прописываю адрес изображения.
-             Короче импортированная в проект картинка. Для таких ресурсов
-             прописывается их название, а не адрес.
-             Чтобы картинка плотно прилегала к кнопке, я обрезал её и задал
-             отрицательный отступ сверху, чтобы сдвинуть её вверх-->
-            <Button
-                android:id="@+id/typeNonMet"
-                android:tag="non_metal"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="5dp"
-                android:backgroundTint="#d73283"
-                android:gravity="center"
-                android:text="Не металл Ы"
-                android:textSize="12sp"
-                android:layout_marginTop="-108dp"
-                android:layout_marginEnd="-65dp"
-                tools:ignore="DuplicateIds" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/stas"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:background="@drawable/hSveshYucpk" />
+                <!-- Аймедж вью. Я не использовал его в активити велком, только тут.
+                 Позволяет выводить изображение. У меня изображение забито в
+                 папке дровабля, поэтому я не прописываю адрес изображения.
+                 Короче импортированная в проект картинка. Для таких ресурсов
+                 прописывается их название, а не адрес.
+                 Чтобы картинка плотно прилегала к кнопке, я обрезал её и задал
+                 отрицательный отступ сверху, чтобы сдвинуть её вверх-->
+                <Button
+                    android:id="@+id/typeMet"
+                    android:tag="metal"
+                    android:layout_width="93dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#00000000"
+                    android:gravity="center"
+                    android:text="МеталлЫ"
+                    android:textSize="12sp"
+                    android:layout_alignBaseline="@id/stas"
+                    android:layout_alignEnd="@id/stas"
+                    android:layout_marginEnd="100dp"/>
+
+                <Button
+                    android:id="@+id/typeNonMet"
+                    android:tag="non_metal"
+                    android:layout_width="120dp"
+                    android:layout_height="115dp"
+                    android:backgroundTint="#00000000"
+                    android:gravity="center"
+                    android:text="Не металлЫ"
+                    android:textSize="15sp"
+                    android:layout_alignBottom="@id/stas"
+                    android:layout_alignEnd="@id/stas"/>
+                <Button
+                    android:id="@+id/typeDich1"
+                    android:tag="non_metal"
+                    android:layout_width="120dp"
+                    android:layout_height="115dp"
+                    android:backgroundTint="#00000000"
+                    android:gravity="center"
+                    android:text="Не металлЫ"
+                    android:textSize="15sp"
+                    android:layout_alignBottom="@id/stas"
+                    android:layout_alignEnd="@id/stas"/>
+            </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
