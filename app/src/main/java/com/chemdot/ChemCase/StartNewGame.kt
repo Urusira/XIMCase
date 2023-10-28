@@ -13,6 +13,8 @@ class StartNewGame : AppCompatActivity() {
 
         val newGameMet = findViewById<Button>(R.id.typeMet)
         val newGameNonMet = findViewById<Button>(R.id.typeNonMet)
+        val newGameOrg = findViewById<Button>(R.id.typeOrganic)
+        val newGameAll = findViewById<Button>(R.id.typeAll)
         newGameMet.setOnClickListener{
             val intent = Intent(this, GameCycle::class.java)
             intent.putExtra("category","${newGameMet.tag}")
@@ -22,6 +24,18 @@ class StartNewGame : AppCompatActivity() {
         newGameNonMet.setOnClickListener{
             val intent = Intent(this, GameCycle::class.java)
             intent.putExtra("category","${newGameNonMet.tag}")
+            startActivity(intent)
+            finish()
+        }
+        newGameOrg.setOnClickListener{
+            val intent = Intent(this, GameCycle::class.java)
+            intent.putExtra("category","${newGameOrg.tag}")
+            startActivity(intent)
+            finish()
+        }
+        newGameAll.setOnClickListener{
+            val intent = Intent(this, GameCycle::class.java)
+            intent.putExtra("category","${newGameAll.tag}")
             startActivity(intent)
             finish()
         }

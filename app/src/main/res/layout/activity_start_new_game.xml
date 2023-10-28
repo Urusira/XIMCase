@@ -45,7 +45,7 @@
                     android:id="@+id/stas"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:background="@drawable/hSveshYucpk" />
+                    android:background="@drawable/molecula" />
                 <!-- Аймедж вью. Я не использовал его в активити велком, только тут.
                  Позволяет выводить изображение. У меня изображение забито в
                  папке дровабля, поэтому я не прописываю адрес изображения.
@@ -56,38 +56,52 @@
                 <Button
                     android:id="@+id/typeMet"
                     android:tag="metal"
-                    android:layout_width="93dp"
-                    android:layout_height="85dp"
+                    android:layout_width="103dp"
+                    android:layout_height="95dp"
                     android:backgroundTint="#00000000"
                     android:gravity="center"
                     android:text="МеталлЫ"
                     android:textSize="12sp"
                     android:layout_alignBaseline="@id/stas"
-                    android:layout_alignEnd="@id/stas"
-                    android:layout_marginEnd="100dp"/>
+                    android:layout_alignEnd="@id/stas"/>
 
                 <Button
                     android:id="@+id/typeNonMet"
                     android:tag="non_metal"
-                    android:layout_width="120dp"
-                    android:layout_height="115dp"
+                    android:layout_width="98dp"
+                    android:layout_height="93dp"
                     android:backgroundTint="#00000000"
                     android:gravity="center"
                     android:text="Не металлЫ"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp"
                     android:layout_alignBottom="@id/stas"
                     android:layout_alignEnd="@id/stas"/>
+
                 <Button
-                    android:id="@+id/typeDich1"
-                    android:tag="non_metal"
-                    android:layout_width="120dp"
-                    android:layout_height="115dp"
+                    android:id="@+id/typeOrganic"
+                    android:tag="organic"
+                    android:layout_width="86dp"
+                    android:layout_height="86dp"
                     android:backgroundTint="#00000000"
                     android:gravity="center"
-                    android:text="Не металлЫ"
-                    android:textSize="15sp"
-                    android:layout_alignBottom="@id/stas"
-                    android:layout_alignEnd="@id/stas"/>
+                    android:text="ОрганикА"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignLeft="@id/stas"
+                    android:layout_marginTop="155dp"/>
+                <Button
+                    android:id="@+id/typeAll"
+                    android:tag="All"
+                    android:layout_width="135dp"
+                    android:layout_height="125dp"
+                    android:backgroundTint="#00000000"
+                    android:gravity="center"
+                    android:text="Все разделы"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginTop="135dp"
+                    android:layout_alignRight="@id/stas"/>
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
