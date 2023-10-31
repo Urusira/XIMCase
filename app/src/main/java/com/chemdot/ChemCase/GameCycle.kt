@@ -20,6 +20,7 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
     private var QuestionsList: ArrayList<Question>? = null
     private var SelectedOptionPosition : Int = 0
     private var blocker = false
+    private var CorrAnswersCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
         binding.progressBar.progress = CurrentPosition
         //  В качестве текста правее полоски пишем текущую позицию из максимально возможной, для этой полоски
         binding.progress.text = "$CurrentPosition" + "/" + QuestionsList!!.size
+        binding.progressBar.max = QuestionsList!!.size
 
         binding.questionText.text = qquestion.question //  Помещаем в поле с вопросом сам вопрос, который вычленяли из списка вопросов в самом начале
 
@@ -145,6 +147,8 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
                                 else -> {  //В противном случае вызываем экран, где сообщаем пользователю, что он прошёл тест
                                     val intent = Intent(this, DialogendActivity::class.java)
+                                    intent.putExtra("CurrAnswers","$CorrAnswersCounter")
+                                    intent.putExtra("AnswersCount", "${QuestionsList!!.size}")
                                     startActivity(intent)
                                     finish()
                                 }
@@ -153,6 +157,8 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
                             val question = QuestionsList?.get(CurrentPosition - 1)
                             if (question!!.correctAnswer != SelectedOptionPosition) {
                                 answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
+                            } else {
+                                CorrAnswersCounter++
                             }
                             answerView(question.correctAnswer, R.drawable.correct_option_bg)
 
@@ -183,6 +189,8 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
 
                                 else -> {  //В противном случае вызываем экран, где сообщаем пользователю, что он прошёл тест
                                     val intent = Intent(this, DialogendActivity::class.java)
+                                    intent.putExtra("CurrAnswers","$CorrAnswersCounter")
+                                    intent.putExtra("AnswersCount", "${QuestionsList!!.size}")
                                     startActivity(intent)
                                     finish()
                                 }
@@ -191,6 +199,8 @@ class GameCycle : AppCompatActivity(), View.OnClickListener {
                             val question = QuestionsList?.get(CurrentPosition - 1)
                             if (question!!.correctAnswer != SelectedOptionPosition) {
                                 answerView(SelectedOptionPosition, R.drawable.uncorrect_option_bg)
+                            } else {
+                                CorrAnswersCounter++
                             }
                             answerView(question.correctAnswer, R.drawable.correct_option_bg)
 
